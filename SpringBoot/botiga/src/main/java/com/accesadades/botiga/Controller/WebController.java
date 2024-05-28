@@ -40,4 +40,12 @@ public class WebController {
         }
         return "search"; // Referencia a search.html en el directorio templates
     }
+
+    @RequestMapping(value = "/newProduct", method = RequestMethod.GET)
+    public String showProductCreationForm() {
+        return "productCreation"; // Referencia a productCreation.html en el directorio templates
+    }
+
+    // @RequestMapping(value = "/desar", method = (RequestMethod.POST))
+    // public String newProduct
 }

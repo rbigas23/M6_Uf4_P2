@@ -11,9 +11,22 @@ import com.accesadades.botiga.Model.Product;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> 
 {
+    @NonNull
+    @Override
+    Set<Product> findAll();
+
+    @NonNull
+    Set<Product> findBySubCategory(String sub_category);
+
+    @NonNull
+    Product findByName(@NonNull String name);
+
+    @Override
+    void deleteById(@NonNull Long id);
+
     @Override
     @NonNull
-    Set<Product> findAll();
-    Product findByName(String name);
-    Set<Product> findByNameAndPrice(String name, float price);
+    <S extends Product> S save(@NonNull S entity);
+
+    void increasePrice(Product product_to_increase_price_of);
 }

@@ -1,4 +1,3 @@
-
 package com.accesadades.botiga.Model;
 
 import lombok.*;
@@ -16,25 +15,30 @@ public class Product implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long product_id;
+    private long productId;
+
     @Column
     private String name;
+
     @Column
     private String description;
+
     @Column
     private String company;
+
     @Column
     private float price;
+
     @Column
     private long units;
-    @Column(name = "creation_at")
-    private LocalDateTime creation_date;
-    @Column(name = "updated_at")
-    private LocalDateTime update_date;
-    @Column
-    private String sub_category;
 
-/*     @ManyToOne(cascade=CascadeType.PERSIST)
+    @Column(name = "creation_at")
+    private LocalDateTime creationDate;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updateDate;
+
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="subcategory_id")
-    private SubCategory subcategory;    */ 
+    private SubCategory subCategory;    
 }
