@@ -4,31 +4,46 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
 
 import com.accesadades.botiga.Model.Product;
+import com.accesadades.botiga.Model.SubCategory;
 import com.accesadades.botiga.Repository.ProductRepository;
 
-public class ProductServiceImpl implements ProductService
-{
+// Implementació de la interfície de servei de Product
+@Service
+public class ProductServiceImpl implements ProductService {
     @Autowired
-    private ProductRepository product_repository;
+    private ProductRepository productRepository;
 
     @Override
-    public Set<Product> findAllProducts() {return product_repository.findAll();}
+    public Set<Product> findAllProducts() {
+        return productRepository.findAll();
+    }
 
     @Override
-    public Product findProductsByName(String name) {return product_repository.findByName(name);}
+    public Product findProductsByName(String name) {
+        return productRepository.findByName(name);
+    }
 
     @Override
-    public Set<Product> findAllProducts(String subcategory) {return product_repository.findBySubCategory(subcategory);}
+    public Set<Product> findProductsBySubCategory(SubCategory subcategory) {
+        return productRepository.findBySubCategory(subcategory);
+    }
 
     @Override
-    public void deleteById(@NonNull Long id) {product_repository.deleteById(id);}
+    public void deleteProductById(@NonNull Long id) {
+        productRepository.deleteById(id);
+    }
 
     @Override
-    public Product save(Product entity) {return product_repository.save(entity);}
+    public Product saveProduct(Product entity) {
+        return productRepository.save(entity);
+    }
 
     @Override
-    public void increasePrice(Product product) {product_repository.increasePrice(product);}
+    public void increaseProductPrice(Product product, float amount) {
+        productRepository.increasePrice(product.getProductId(), amount);
+    }
 
 }

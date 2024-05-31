@@ -1,31 +1,43 @@
 package com.accesadades.botiga.Service;
 
-import com.accesadades.botiga.Model.SubCategory;
-import com.accesadades.botiga.Repository.SubcategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.accesadades.botiga.Model.SubCategory;
+import com.accesadades.botiga.Repository.SubcategoryRepository;
+
+// Implementació de la interfície de servei de SubCategory
 @Service
-public class SubCategoryServiceImpl implements SubCategoryService
-{
+public class SubCategoryServiceImpl implements SubCategoryService {
     @Autowired
     private SubcategoryRepository subCategoryRepository;
 
     @Override
-    public Set<SubCategory> findAllSubCategories() {return subCategoryRepository.findAll();}
+    public Set<SubCategory> findAllSubCategories() {
+        return subCategoryRepository.findAll();
+    }
 
     @Override
-    public Optional<SubCategory> findById(Long id) {return subCategoryRepository.findById(id);}
+    public Optional<SubCategory> findSubcategoryById(Long subcategoryId) {
+        return subCategoryRepository.findById(subcategoryId);
+    }
 
     @Override
-    public List<SubCategory> findByName(String subCategoryName) {return subCategoryRepository.findByName(subCategoryName);}
+    public Optional<SubCategory> findSubcategoryByName(String subCategoryName) {
+        return subCategoryRepository.findByName(subCategoryName);
+    }
 
     @Override
-    public SubCategory save(SubCategory subCategory) {return subCategoryRepository.save(subCategory);}
+    public SubCategory saveSubcategory(SubCategory subCategory) {
+        subCategoryRepository.save(subCategory);
+        return subCategory;
+    }
 
     @Override
-    public void deleteById(Long id) {subCategoryRepository.deleteById(id);}
+    public void deleteSubcategoryById(Long subcategoryId) {
+        subCategoryRepository.deleteById(subcategoryId);
+    }
 }

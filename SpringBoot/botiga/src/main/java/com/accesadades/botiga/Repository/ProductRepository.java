@@ -2,31 +2,33 @@ package com.accesadades.botiga.Repository;
 
 import java.util.Set;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import com.accesadades.botiga.Model.Product;
+import com.accesadades.botiga.Model.SubCategory;
 
+import jakarta.transaction.Transactional;
+
+// Repositori de l'entitat Product
+// Només implementem els mètodes necessaris per a que el servei funcioni correctament
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Long> 
-{
+public interface ProductRepository extends CrudRepository<Product, Long> {
     @NonNull
     @Override
     Set<Product> findAll();
 
     @NonNull
-    Set<Product> findBySubCategory(String sub_category);
+    Product findByName(@NonNull String productName);
 
     @NonNull
-    Product findByName(@NonNull String name);
-
-    @Override
-    void deleteById(@NonNull Long id);
-
-    @Override
-    @NonNull
-    <S extends Product> S save(@NonNull S entity);
-
-    void increasePrice(Product product_to_increase_price_of);
+    Set<Product> findBySubCategory(SubCategory subCategory);
+    
+    @Modifying
+    @Transactional
+    @Query("UPDATE Product p SET p.price = p.price + :amount WHERE p.id = :productId")
+    void increasePrice(long productId, float amount);
 }
